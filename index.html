@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CV &amp; Portfolio Builder – Business Application Developer</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+:root{--bg:#EEF1F6;--panel:#fff;--tx:#1F2937;--mut:#6B7280;--bd:#D8DEE8;--accent:#F59E0B;--navy:#12233F;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10151F;--panel:#1A2230;--tx:#E5EAF3;--mut:#93A0B5;--bd:#2B3648;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10151F;--panel:#1A2230;--tx:#E5EAF3;--mut:#93A0B5;--bd:#2B3648;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 "Segoe UI",Calibri,Arial,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--panel);z-index:21}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--panel);border-bottom:1px solid var(--bd);padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bar h1{font-size:16px;margin:0 8px 0 0;flex:1 1 200px}.bar h1 small{display:block;font-weight:400;color:var(--mut);font-size:12px}
+button,label.btn{font:inherit;font-size:13.5px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);padding:7px 12px;border-radius:8px;cursor:pointer}
+button:hover,label.btn:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#2a1a00;font-weight:600}
+.clr{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--mut)}.clr input{width:30px;height:30px;border:0;padding:0;background:none;cursor:pointer}
+.hint{max-width:794px;margin:14px auto 0;padding:0 16px;color:var(--mut);font-size:13px}
+.stage{padding:14px 8px 40px;overflow-x:auto}.wrap{width:794px;margin:0 auto}
+#cv{width:794px;min-height:1123px;background:linear-gradient(to right,var(--navy) 0,var(--navy) 257px,var(--accent) 257px,var(--accent) 260px,#fff 260px);color:#1F2937;font-family:"Segoe UI",Calibri,Arial,sans-serif;display:grid;grid-template-columns:260px 1fr;box-shadow:0 6px 28px rgba(0,0,0,.18)}
+.side{padding:34px 24px;color:#E5EAF3}.main{padding:38px 38px 40px 36px}
+.logo{width:120px;height:120px;border-radius:50%;background:var(--accent);margin:0 auto 22px;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;color:var(--navy);font-weight:700;font-size:30px}
+.logo img{width:100%;height:100%;object-fit:contain;background:#fff}
+.side h3{color:var(--accent);font-size:12.5px;letter-spacing:.08em;margin:20px 0 7px;text-transform:uppercase}
+.ct small{display:block;font-size:9.5px;color:#9FB0CC;letter-spacing:.06em;text-transform:uppercase}.ct div{margin-bottom:8px;font-size:12.5px;word-break:break-word}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{background:#1F3A63;color:#fff;border-radius:99px;padding:2px 10px;font-size:11px;display:inline-flex;align-items:center;gap:5px}
+.x,.add,.rm,.opn{cursor:pointer;user-select:none}.x{opacity:.7;font-size:12px}
+.add{background:transparent;border:1px dashed #5b7096;color:#9FB0CC;border-radius:99px;padding:1px 9px;font-size:11px}
+.main .chips .chip{background:#FEF3C7;color:#78350F;font-size:10.5px}.main .add{border-color:#D6B36A;color:#92600A}
+h1.nm{font-size:36px;line-height:1.1;margin:0;color:var(--navy)}
+.role{color:#B45309;font-weight:700;font-size:15px;margin:6px 0 2px;letter-spacing:.03em}.tag{color:#6B7280;font-size:12px}
+.main h2{font-size:15px;letter-spacing:.05em;text-transform:uppercase;color:var(--navy);margin:22px 0 10px;padding:0 0 4px 10px;border-left:4px solid var(--accent);border-bottom:1px solid #D1D5DB;break-after:avoid}
+.main p{font-size:12.5px;margin:0 0 7px}.main ul{margin:0;padding-left:18px}.main li{font-size:12.5px;margin-bottom:3px}.main li::marker{color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 4px}
+.stat{border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;text-align:center;background:#FFFBEB}
+.stat b{display:block;font-size:20px;color:var(--navy)}.stat span{font-size:10.5px;color:#6B7280}
+.proj{margin:0 0 16px;padding:0 0 12px;border-bottom:1px dashed #D1D5DB}
+.proj h4{font-size:14px;color:var(--navy);margin:0 0 2px;break-after:avoid}
+.stack{font-size:11px;color:#B45309;font-weight:600;margin-bottom:4px}
+.vids{margin:6px 0 0;font-size:11.5px}.vids .v{display:flex;gap:6px;align-items:baseline;margin-bottom:2px;word-break:break-all}.vids .v>span:first-child{flex:0 0 auto}
+.opn{color:#2563EB;font-size:11px;border:1px solid #BFDBFE;border-radius:5px;padding:0 5px;flex:0 0 auto}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+.shot{break-inside:avoid;position:relative;border:1px solid #D1D5DB;border-radius:6px;overflow:hidden;background:#F8FAFC;margin:0}
+.shot img{display:block;width:100%;height:auto}.shot .cap{font-size:10.5px;padding:5px 8px;color:#4B5563}
+.rm{position:absolute;top:5px;right:5px;background:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.3);color:#111;font-size:12px}
+.ctl{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.ctl button{font-size:11.5px;padding:3px 9px;background:#fff;color:#374151;border-color:#D1D5DB}
+.pdel{float:right;font-size:11px;color:#9CA3AF;cursor:pointer;font-weight:400}
+[contenteditable]{outline:none;border-radius:3px}
+#cv:not(.exporting) [contenteditable]:hover{background:rgba(245,158,11,.1)}
+#cv:not(.exporting) [contenteditable]:focus{background:rgba(245,158,11,.18);box-shadow:0 0 0 1px var(--accent)}
+.exporting .x,.exporting .add,.exporting .rm,.exporting .ctl,.exporting .pdel,.exporting .opn{display:none!important}
+@media (max-width:820px){.wrap{zoom:calc(100vw / 830)}}
+@media print{@page{size:A4;margin:0}body{background:#fff}.bar,.hint,body::before{display:none!important}.stage{padding:0;overflow:visible}.wrap{zoom:1!important;width:210mm}
+#cv{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}.x,.add,.rm,.ctl,.pdel,.opn{display:none!important}}
+</style></head>
+<body>
+<div class="bar">
+ <h1>CV &amp; Portfolio Builder<small>Click any text on the page to edit it</small></h1>
+ <label class="btn">Upload logo<input id="logoIn" type="file" accept="image/*" hidden></label>
+ <button id="logoRm">Remove logo</button>
+ <button id="addProj">+ New project</button>
+ <span class="clr">Accent <input id="acc" type="color" value="#F59E0B"></span>
+ <button id="reset">Reset</button>
+ <button class="primary" id="pdf">Download PDF</button>
+</div>
+<div class="hint" id="msg">Each project has its own “+ Screenshots” and “+ Demo video link” buttons. Edits save automatically in this browser.</div>
+<div class="stage"><div class="wrap" id="wrap"><div id="cv"></div></div></div>
+<script>
+var CH={"Platforms":["Google Apps Script","Google Sheets","Core PHP","MySQL","MS Access","VBA","HTML / CSS / JS"],
+"Business Domains":["School Management","Inventory & Purchase","Hospital ERP","E-commerce","Accounting & Invoicing","CRM"],
+"Strengths":["Database design","Workflow automation","Dashboards & Reports","Admin panels","Role-based access","Desktop & Web apps"]};
+var PR=[["Proof-of-Concept (POC) Applications","Core PHP • Google Apps Script • MS Access","Quick working prototypes that let clients see and test an idea before committing to a full build.",["Rapid prototyping from client requirements","Demo-ready within a short turnaround"]],
+["School Management System","Tech stack: click to edit","Student records, fees, attendance, results and reporting in one place.",["Student and class management","Fee collection and printable reports"]],
+["Inventory & Purchase Management","Tech stack: click to edit","Tracks stock, suppliers, purchase orders and goods received with live stock levels.",["Purchase orders and supplier records","Stock reports and low-stock alerts"]],
+["Hospital ERP","Tech stack: click to edit","Patient registration, appointments, billing and department workflows.",["Patient and appointment management","Billing and summary reports"]],
+["E-commerce Websites","Core PHP • MySQL","Online stores with product catalogues, carts, orders and an admin panel.",["Product, order and customer management","Admin dashboard for day-to-day operations"]],
+["Accounting & Invoicing","Tech stack: click to edit","Invoices, payments, ledgers and financial summaries for small and mid-sized businesses.",["Invoice generation and tracking","Cash flow and account summaries"]]];
+var KEY="portfolio.v1",cv=document.getElementById("cv"),msg=document.getElementById("msg");
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function chip(t){return '<span class="chip"><span contenteditable="true" spellcheck="false">'+esc(t)+'</span><span class="x">×</span></span>'}
+function proj(p){return '<div class="proj"><span class="pdel">remove project</span><h4 contenteditable="true">'+esc(p[0])+'</h4><div class="stack" contenteditable="true">'+esc(p[1])+'</div><p contenteditable="true">'+esc(p[2])+'</p><ul contenteditable="true">'+p[3].map(function(b){return '<li>'+esc(b)+'</li>'}).join("")+'</ul><div class="vids"></div><div class="shots"></div><div class="ctl"><button class="addshot">+ Screenshots</button><button class="addvid">+ Demo video link</button></div></div>'}
+function build(){
+ var side=Object.keys(CH).map(function(k){return '<h3 contenteditable="true">'+k+'</h3><div class="chips">'+CH[k].map(chip).join("")+'<span class="add">+ add</span></div>'}).join("");
+ cv.innerHTML='<aside class="side"><div class="logo" id="logo" title="Click to upload a logo"><span id="mono" contenteditable="true">YN</span></div><h3>Contact</h3><div class="ct">'+[["Email","your.email@example.com"],["Phone / WhatsApp","+92 3XX XXXXXXX"],["Location","City, Country"],["Portfolio / LinkedIn","yourname.com"]].map(function(c){return '<div><small>'+c[0]+'</small><span contenteditable="true">'+c[1]+'</span></div>'}).join("")+'</div>'+side+'</aside>'+
+ '<section class="main"><h1 class="nm" contenteditable="true">YOUR NAME</h1><div class="role" contenteditable="true">BUSINESS APPLICATION DEVELOPER</div><div class="tag" contenteditable="true">Google Apps Script • Core PHP &amp; MySQL • Microsoft Access &amp; VBA</div>'+
+ '<h2><span contenteditable="true">Profile</span></h2><div contenteditable="true"><p>I build business applications that people actually use every day. From school and hospital systems to inventory, purchasing, e-commerce and accounting, I turn real business processes into clean, reliable software, on the web with Google Apps Script and Core PHP with MySQL, and on the desktop with Microsoft Access and VBA.</p><p>I’ve completed many applications, from quick proof-of-concept builds to full working systems, and I enjoy taking an idea from requirements through to a tool the client can run their business on.</p></div>'+
+ '<div class="stats"><div class="stat"><b contenteditable="true">10+</b><span contenteditable="true">Applications delivered</span></div><div class="stat"><b contenteditable="true">3</b><span contenteditable="true">Platforms mastered</span></div><div class="stat"><b contenteditable="true">6+</b><span contenteditable="true">Business domains</span></div></div>'+
+ '<h2><span contenteditable="true">Selected Projects &amp; Portfolio</span></h2><div id="projs">'+PR.map(proj).join("")+'</div></section>';
+}
+function save(){try{localStorage.setItem(KEY,cv.innerHTML)}catch(e){msg.textContent="Autosave is full (many large images). Download your PDF to keep your work."}}
+function load(){try{var h=localStorage.getItem(KEY);if(h){cv.innerHTML=h;return}}catch(e){}build()}
+function scaleImg(f,max,type,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var k=Math.min(1,max/im.width),c=document.createElement("canvas");c.width=im.width*k;c.height=im.height*k;var x=c.getContext("2d");if(type=="image/jpeg"){x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height)}x.drawImage(im,0,0,c.width,c.height);cb(c.toDataURL(type,.82))};im.src=r.result};r.readAsDataURL(f)}
+function setLogo(u){var l=document.getElementById("logo"),o=l.querySelector("img"),m=document.getElementById("mono");if(o)o.remove();if(u){var i=new Image();i.src=u;l.insertBefore(i,m);m.style.display="none"}else m.style.display=""}
+function pickFiles(cb){var i=document.createElement("input");i.type="file";i.accept="image/*";i.multiple=true;i.onchange=function(){cb(i.files)};i.click()}
+function addShot(box,u){var d=document.createElement("figure");d.className="shot";d.innerHTML='<span class="rm">×</span><img src="'+u+'" alt=""><div class="cap" contenteditable="true">Screen caption</div>';box.appendChild(d)}
+document.getElementById("logoIn").onchange=function(e){var f=e.target.files[0];if(f)scaleImg(f,400,"image/png",function(u){setLogo(u);save()});e.target.value=""};
+document.getElementById("logoRm").onclick=function(){setLogo(null);save()};
+cv.addEventListener("click",function(e){var t=e.target,c=t.classList;
+ if(c.contains("x")){t.parentNode.remove();save()}
+ else if(c.contains("add")){var s=document.createElement("span");s.innerHTML=chip("New");t.parentNode.insertBefore(s.firstChild,t);var ed=t.previousSibling.firstChild;ed.focus();document.getSelection().selectAllChildren(ed);save()}
+ else if(c.contains("rm")){t.parentNode.remove();save()}
+ else if(c.contains("pdel")){t.closest(".proj").remove();save()}
+ else if(c.contains("addshot")){var box=t.closest(".proj").querySelector(".shots");pickFiles(function(fs){Array.prototype.forEach.call(fs,function(f){scaleImg(f,1000,"image/jpeg",function(u){addShot(box,u);save()})})})}
+ else if(c.contains("addvid")){var v=document.createElement("div");v.className="v";v.innerHTML='<span>▶ Demo:</span><span contenteditable="true" style="flex:1">Paste video link here (YouTube, Drive, Loom…)</span><span class="opn">open ↗</span>';t.closest(".proj").querySelector(".vids").appendChild(v);var ed=v.children[1];ed.focus();document.getSelection().selectAllChildren(ed);save()}
+ else if(c.contains("opn")){var m=(t.previousSibling.textContent||"").match(/https?:\/\/\S+/);if(m)window.open(m[0],"_blank","noopener");else msg.textContent="Add a full link starting with https:// first."}
+ else if(t.id=="logo"||(t.tagName=="IMG"&&t.parentNode.id=="logo"))document.getElementById("logoIn").click()});
+cv.addEventListener("input",function(){clearTimeout(window._t);window._t=setTimeout(save,500)});
+cv.addEventListener("keydown",function(e){if(e.key=="Enter"&&e.target.closest&&e.target.closest(".chip,.nm,.role,.tag,h2,h3,h4,.stack,.v,.stat,.logo"))e.preventDefault()});
+cv.addEventListener("paste",function(e){if(e.target.isContentEditable){e.preventDefault();document.execCommand("insertText",false,(e.clipboardData||window.clipboardData).getData("text/plain"))}});
+document.getElementById("addProj").onclick=function(){var d=document.createElement("div");d.innerHTML=proj(["New Project Title","Tech stack: click to edit","Describe what the application does and who it helps.",["Key feature one","Key feature two"]]);document.getElementById("projs").appendChild(d.firstChild);d.firstChild&&0;save()};
+document.getElementById("acc").oninput=function(e){document.documentElement.style.setProperty("--accent",e.target.value);try{localStorage.setItem(KEY+".acc",e.target.value)}catch(x){}};
+document.getElementById("reset").onclick=function(){if(confirm("Reset to the original template? Your edits, images and links will be removed.")){try{localStorage.removeItem(KEY)}catch(e){}build();save()}};
+document.getElementById("pdf").onclick=async function(){
+ var b=this,w=document.getElementById("wrap");b.disabled=true;b.textContent="Preparing PDF…";cv.classList.add("exporting");var z=w.style.zoom;w.style.zoom="1";
+ try{var dl=null;try{dl=await claude.use("downloads")}catch(e){}
+  if(!dl||!window.html2pdf){window.print();return}
+  var blob=await html2pdf().set({margin:0,image:{type:"jpeg",quality:.95},html2canvas:{scale:2,useCORS:true,backgroundColor:"#ffffff",scrollY:0},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},pagebreak:{mode:["css"],avoid:[".proj",".shot","h2"]}}).from(cv).outputPdf("blob");
+  var nm=(cv.querySelector(".nm").textContent.trim()||"CV").replace(/[^\w\- ]+/g,"").replace(/\s+/g,"_");
+  await dl.save({filename:nm+"_Portfolio_CV.pdf",data:blob});
+ }catch(err){if(!err||err.code!="declined"){msg.textContent="Couldn’t create the PDF directly. Opening print – choose “Save as PDF”.";try{window.print()}catch(e){}}}
+ finally{cv.classList.remove("exporting");w.style.zoom=z;b.disabled=false;b.textContent="Download PDF"}};
+try{var a=localStorage.getItem(KEY+".acc");if(a){document.documentElement.style.setProperty("--accent",a);document.getElementById("acc").value=a}}catch(e){}
+load();
+</script></body></html>
